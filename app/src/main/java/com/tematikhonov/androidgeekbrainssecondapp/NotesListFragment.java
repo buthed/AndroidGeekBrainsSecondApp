@@ -1,6 +1,7 @@
 package com.tematikhonov.androidgeekbrainssecondapp;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,12 +15,10 @@ import android.widget.TextView;
 
 public class NotesListFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
+    private boolean isLandscape;
 
     public NotesListFragment() {
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -32,6 +31,17 @@ public class NotesListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initList(view);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        isLandscape =getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+
+        if (isLandscape) {
+            showNote(NoteFragment.DEFAULT_INDEX);
+        }
     }
 
     private void initList(View view) {
@@ -52,6 +62,21 @@ public class NotesListFragment extends Fragment {
     }
 
     void showNote(int index) {
+        if (isLandscape) {
+            showLandNote(index);
+        } else {
+            showPortNote(index);
+        }
+    }
+
+    void showLandNote(int index) {
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.noteLayout, NoteFragment.newInstance(index))
+                .commit();
+    }
+
+    void showPortNote(int index) {
         Intent intent = new Intent();
         intent.setClass(getActivity(), NoteViewActivity.class);
         intent.putExtra(NoteFragment.ARG_INDEX, index);
