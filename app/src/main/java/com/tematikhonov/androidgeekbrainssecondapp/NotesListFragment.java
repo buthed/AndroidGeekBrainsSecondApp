@@ -82,6 +82,4 @@ public class NotesListFragment extends Fragment {
         intent.putExtra(NoteFragment.ARG_INDEX, index);
         startActivity(intent);
     }
-
-
 }
