@@ -1,5 +1,6 @@
 package com.tematikhonov.androidgeekbrainssecondapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,23 +19,7 @@ public class NotesListFragment extends Fragment {
     public NotesListFragment() {
     }
 
-//    public static NotesListFragment newInstance(String param1, String param2) {
-//        NotesListFragment fragment = new NotesListFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-//
-//
-//
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//        }
-//    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -58,7 +43,19 @@ public class NotesListFragment extends Fragment {
             textView.setText(noteName);
             textView.setTextSize(30);
             linearLayout.addView(textView);
+
+            final int currentIndex = i;
+            textView.setOnClickListener(v -> {
+                showNote(currentIndex);
+            });
         }
+    }
+
+    void showNote(int index) {
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), NoteViewActivity.class);
+        intent.putExtra(NoteFragment.ARG_INDEX, index);
+        startActivity(intent);
     }
 
 

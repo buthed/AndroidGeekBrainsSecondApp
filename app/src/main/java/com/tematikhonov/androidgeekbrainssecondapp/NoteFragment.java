@@ -7,10 +7,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class NoteFragment extends Fragment {
 
-    private static final String ARG_INDEX = "index";
+    public static final String ARG_INDEX = "index";
     private static final int DEFAULT_INDEX = 0;
     private int index = DEFAULT_INDEX;
 
@@ -37,6 +38,12 @@ public class NoteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_note, container, false);
+        String[] notes_description = getResources().getStringArray(R.array.notes_description);
+        View view = inflater.inflate(R.layout.fragment_note, container, false);
+
+        TextView textView = view.findViewById(R.id.noteView);
+        textView.setText(notes_description[index]);
+
+        return view;
     }
 }
