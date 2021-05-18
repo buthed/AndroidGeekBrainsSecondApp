@@ -16,6 +16,9 @@ import android.widget.TextView;
 public class NotesListFragment extends Fragment {
 
     private boolean isLandscape;
+    private int position = 0;
+
+    public static final String CURRENT_NOTE = "CURRENT_NOTE";
 
     public NotesListFragment() {
     }
@@ -36,11 +39,13 @@ public class NotesListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        isLandscape =getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+        isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+        if (savedInstanceState != null) {
+            position = savedInstanceState.getInt(CURRENT_NOTE, NoteFragment.DEFAULT_INDEX);
+        }
 
         if (isLandscape) {
-            showNote(NoteFragment.DEFAULT_INDEX);
+            showNote(position);
         }
     }
 
@@ -57,8 +62,15 @@ public class NotesListFragment extends Fragment {
             final int currentIndex = i;
             textView.setOnClickListener(v -> {
                 showNote(currentIndex);
+                position = currentIndex;
             });
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(CURRENT_NOTE, position);
     }
 
     void showNote(int index) {
