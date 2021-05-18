@@ -1,5 +1,6 @@
 package com.tematikhonov.androidgeekbrainssecondapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -7,18 +8,23 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class NotesListFragment extends Fragment {
 
     private boolean isLandscape;
-    private int position = 0;
-
-    public static final String CURRENT_NOTE = "CURRENT_NOTE";
+    private Note[] notes;
+    private Note currentNote;
 
     public NotesListFragment() {
     }
@@ -41,57 +47,70 @@ public class NotesListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
         if (savedInstanceState != null) {
-            position = savedInstanceState.getInt(CURRENT_NOTE, NoteFragment.DEFAULT_INDEX);
+            currentNote = savedInstanceState.getParcelable(NoteFragment.CURRENT_NOTE);
+        } else {
+            currentNote = notes[0];
         }
-
         if (isLandscape) {
-            showNote(position);
+            showLandNote(currentNote);
         }
     }
 
     private void initList(View view) {
-        LinearLayout linearLayout = (LinearLayout) view;
-        String[] notes_name = getResources().getStringArray(R.array.notes_name);
-        for (int i = 0; i < notes_name.length; i++) {
-            String noteName = notes_name[i];
-            TextView textView = new TextView(getContext());
-            textView.setText(noteName);
-            textView.setTextSize(30);
-            linearLayout.addView(textView);
+        notes = new Note[]{
+                new Note(getString(R.string.note1_name), getString(R.string.note1_desc), Calendar.getInstance()),
+                new Note(getString(R.string.note2_name), getString(R.string.note2_desc), Calendar.getInstance()),
+                new Note(getString(R.string.note3_name), getString(R.string.note3_desc), Calendar.getInstance()),
+                new Note(getString(R.string.note4_name), getString(R.string.note4_desc), Calendar.getInstance()),
+                new Note(getString(R.string.note5_name), getString(R.string.note5_desc), Calendar.getInstance()),
+        };
 
-            final int currentIndex = i;
-            textView.setOnClickListener(v -> {
-                showNote(currentIndex);
-                position = currentIndex;
-            });
+        for (Note note : notes) {
+            Context context = getContext();
+            if (context != null) {
+                LinearLayout linearView = (LinearLayout) view;
+                TextView firstTextView = new TextView(context);
+                TextView secondTextView = new TextView(context);
+                firstTextView.setText(note.getName());
+                SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy", Locale.getDefault());
+                secondTextView.setText(formatter.format(note.getCreationDate().getTime()));
+                linearView.addView(firstTextView);
+                linearView.addView(secondTextView);
+                firstTextView.setPadding(0, 22, 0, 0);
+                firstTextView.setOnClickListener(v -> {
+                    currentNote = note;
+                    showNote(currentNote);
+                });
+            }
         }
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelable(NoteFragment.CURRENT_NOTE, currentNote);
         super.onSaveInstanceState(outState);
-        outState.putInt(CURRENT_NOTE, position);
     }
 
-    void showNote(int index) {
+    private void showNote(Note currentNote) {
         if (isLandscape) {
-            showLandNote(index);
+            showLandNote(currentNote);
         } else {
-            showPortNote(index);
+            showPortNote(currentNote);
         }
     }
 
-    void showLandNote(int index) {
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.noteLayout, NoteFragment.newInstance(index))
-                .commit();
+
+    private void showPortNote(Note currentNote) {
+            Intent intent = new Intent();
+            intent.setClass(getActivity(), NoteViewActivity.class);
+            intent.putExtra(NoteFragment.CURRENT_NOTE, currentNote);
+            startActivity(intent);
     }
 
-    void showPortNote(int index) {
-        Intent intent = new Intent();
-        intent.setClass(getActivity(), NoteViewActivity.class);
-        intent.putExtra(NoteFragment.ARG_INDEX, index);
-        startActivity(intent);
+    private void showLandNote(Note currentNote) {
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.noteLayout, NoteFragment.newInstance(currentNote))
+                .commit();
     }
 }

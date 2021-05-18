@@ -9,19 +9,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 public class NoteFragment extends Fragment {
 
     public static final String ARG_INDEX = "index";
     public static final int DEFAULT_INDEX = 0;
     private int index = DEFAULT_INDEX;
+    static final String CURRENT_NOTE = "currentNote";
+    private Note note;
 
-    public NoteFragment() {
-    }
-
-    public static NoteFragment newInstance(int index) {
+    public static NoteFragment newInstance(Note note) {
         NoteFragment fragment = new NoteFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_INDEX, index);
+        args.putParcelable(CURRENT_NOTE, note);
         fragment.setArguments(args);
         return fragment;
     }
@@ -30,7 +32,7 @@ public class NoteFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            index = getArguments().getInt(ARG_INDEX, DEFAULT_INDEX);
+            note = getArguments().getParcelable(CURRENT_NOTE);
         }
     }
 
@@ -38,17 +40,14 @@ public class NoteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        String[] notes_name = getResources().getStringArray(R.array.notes_name);
-        String[] notes_description = getResources().getStringArray(R.array.notes_description);
-        String[] notes_date = getResources().getStringArray(R.array.notes_date);
         View view = inflater.inflate(R.layout.fragment_note, container, false);
-
         TextView tvName = view.findViewById(R.id.noteName);
         TextView tvDescription = view.findViewById(R.id.noteDescription);
         TextView tvDate = view.findViewById(R.id.noteDate);
-        tvName.setText(notes_name[index]);
-        tvDescription.setText(notes_description[index]);
-        tvDate.setText(notes_date[index]);
+        tvName.setText(note.getName());
+        tvDescription.setText(note.getDescription());
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy", Locale.getDefault());
+        tvDate.setText(String.format("%s", formatter.format(note.getCreationDate().getTime())));
         return view;
     }
 }
