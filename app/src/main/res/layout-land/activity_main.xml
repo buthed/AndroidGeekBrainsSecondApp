@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_notes_list"/>
 
-    <fragment
+    <FrameLayout
         android:id="@+id/noteLayout"
         android:name="com.tematikhonov.androidgeekbrainssecondapp.NoteFragment"
         android:layout_weight="1"
