@@ -3,17 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_700"
+    android:background="@color/teal_200"
     android:orientation="vertical"
     tools:context=".NoteFragment">
-<!--TODO: удалить тулсы-->
+
     <TextView
         android:id="@+id/noteName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_margin"
-        android:textSize="@dimen/title_size"
-        tools:text="Test"/>
+        android:textSize="@dimen/title_size"/>
 
     <TextView
         android:id="@+id/noteDescription"
@@ -21,8 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_margin="@dimen/default_margin"
-        android:textSize="@dimen/text_size"
-        tools:text="Test Desc11"/>
+        android:textSize="@dimen/text_size"/>
 
     <TextView
         android:id="@+id/noteDate"
@@ -30,7 +28,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:layout_margin="@dimen/default_margin"
-        android:textSize="@dimen/text_size"
-        tools:text="Test" />
+        android:textSize="@dimen/text_size"/>
 
 </LinearLayout>

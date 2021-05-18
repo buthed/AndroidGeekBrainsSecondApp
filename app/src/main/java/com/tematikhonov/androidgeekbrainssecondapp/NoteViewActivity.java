@@ -2,7 +2,6 @@
 package com.tematikhonov.androidgeekbrainssecondapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.res.Configuration;
 import android.os.Bundle;
 

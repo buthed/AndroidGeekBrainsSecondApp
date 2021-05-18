@@ -1,22 +1,16 @@
 package com.tematikhonov.androidgeekbrainssecondapp;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class NoteFragment extends Fragment {
 
-    public static final String ARG_INDEX = "index";
-    public static final int DEFAULT_INDEX = 0;
-    private int index = DEFAULT_INDEX;
     static final String CURRENT_NOTE = "currentNote";
     private Note note;
 

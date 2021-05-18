@@ -4,18 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -25,9 +21,6 @@ public class NotesListFragment extends Fragment {
     private boolean isLandscape;
     private Note[] notes;
     private Note currentNote;
-
-    public NotesListFragment() {
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -69,15 +62,18 @@ public class NotesListFragment extends Fragment {
             Context context = getContext();
             if (context != null) {
                 LinearLayout linearView = (LinearLayout) view;
-                TextView firstTextView = new TextView(context);
-                TextView secondTextView = new TextView(context);
-                firstTextView.setText(note.getName());
+                TextView tvName = new TextView(context);
+                TextView tvDate = new TextView(context);
+                tvName.setText(note.getName());
                 SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy", Locale.getDefault());
-                secondTextView.setText(formatter.format(note.getCreationDate().getTime()));
-                linearView.addView(firstTextView);
-                linearView.addView(secondTextView);
-                firstTextView.setPadding(0, 22, 0, 0);
-                firstTextView.setOnClickListener(v -> {
+                tvDate.setText(formatter.format(note.getCreationDate().getTime()));
+                linearView.addView(tvName);
+                linearView.addView(tvDate);
+                tvName.setTextSize(20);
+                tvName.setPadding(20, 20, 0, 0);
+                tvDate.setTextSize(15);
+                tvDate.setPadding(20, 0, 0, 0);
+                tvName.setOnClickListener(v -> {
                     currentNote = note;
                     showNote(currentNote);
                 });
@@ -98,7 +94,6 @@ public class NotesListFragment extends Fragment {
             showPortNote(currentNote);
         }
     }
-
 
     private void showPortNote(Note currentNote) {
             Intent intent = new Intent();

@@ -2,7 +2,6 @@ package com.tematikhonov.androidgeekbrainssecondapp;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import java.util.Calendar;
 
 public class Note implements Parcelable {
@@ -44,10 +43,6 @@ public class Note implements Parcelable {
 
     public Calendar getCreationDate() {
         return creationDate;
-    }
-
-    public void setCreationDate(Calendar creationDate) {
-        this.creationDate = creationDate;
     }
 
     @Override
