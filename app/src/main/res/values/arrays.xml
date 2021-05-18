@@ -9,10 +9,19 @@
     </string-array>
 
     <string-array name="notes_description">
-        <item>aaa</item>
-        <item>bbb</item>
-        <item>ccc</item>
-        <item>ddd</item>
-        <item>eee</item>
+        <item>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed efficitur feugiat tincidunt. Etiam semper eros ex, ut vehicula lectus consequat eu. Maecenas vehicula nulla ut massa accumsan commodo. Quisque nec consequat nunc. Duis sed purus at dui ultricies commodo. Suspendisse vestibulum urna non lorem ultrices, ut imperdiet nisi elementum. Suspendisse consectetur gravida leo eu consectetur. </item>
+        <item>Praesent fermentum ipsum quis auctor pulvinar. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus metus turpis, consectetur sed elit at, vehicula iaculis ante.</item>
+        <item>Aenean eget tellus mattis, posuere neque eu, dignissim lectus. Fusce at ultrices dolor, at accumsan ex. Mauris ac ipsum vehicula, pulvinar mi sit amet, congue urna.</item>
+        <item>Pellentesque vehicula metus ut leo luctus tristique. Mauris convallis augue non mi vulputate, at mattis erat tempus. Nunc dolor urna, euismod sit amet tempus quis, mollis sit amet augue.</item>
+        <item>Donec tincidunt nulla ut lectus interdum tincidunt. Nam aliquam tortor diam, vel porttitor arcu lobortis non. Integer placerat sagittis nisl eget porttitor. Donec pharetra elementum euismod.</item>
+    </string-array>
+
+
+    <string-array name="notes_date">
+        <item>01.01.2021</item>
+        <item>02.02.2021</item>
+        <item>03.03.2021</item>
+        <item>04.04.2021</item>
+        <item>05.05.2021</item>
     </string-array>
 </resources>
