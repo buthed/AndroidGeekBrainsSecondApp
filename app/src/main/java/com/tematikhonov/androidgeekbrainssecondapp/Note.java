@@ -8,4 +8,6 @@ public class Note {
         this.name = name;
         this.description = description;
     }
+
+
 }
