@@ -43,14 +43,10 @@ public class MainActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.action_settings:
-                        Toast toast = Toast.makeText(getApplicationContext(),
-                                "Пора покормить кота!", Toast.LENGTH_SHORT);
-                        toast.show();
+                        Toast.makeText(getBaseContext(), "My message to show!", Toast.LENGTH_LONG).show();
                         return true;
                     case R.id.action_main:
-                        Toast toast1 = Toast.makeText(getApplicationContext(),
-                                "Пора покормить кота!1", Toast.LENGTH_SHORT);
-                        toast1.show();
+                        Toast.makeText(getBaseContext(), "My message to show!1", Toast.LENGTH_LONG).show();
                         return true;
                 }
                 return false;
