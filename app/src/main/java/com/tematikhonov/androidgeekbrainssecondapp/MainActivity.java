@@ -4,15 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,18 +40,27 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id) {
-                    case R.id.action_settings:
-                        Toast.makeText(getBaseContext(), "My message to show!", Toast.LENGTH_LONG).show();
-                        return true;
                     case R.id.action_main:
-                        Toast.makeText(getBaseContext(), "My message to show!1", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getBaseContext(), "Main", Toast.LENGTH_LONG).show();
+                        return true;
+                    case R.id.action_settings:
+                        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                        startActivity(intent);
+                        return true;
+                    case R.id.action_favorite:
+                        Toast.makeText(getBaseContext(), "Favorite", Toast.LENGTH_LONG).show();
+                        return true;
+                    case R.id.action_journal:
+                        Toast.makeText(getBaseContext(), "Journal", Toast.LENGTH_LONG).show();
+                        return true;
+                    case R.id.action_about:
+                        Toast.makeText(getBaseContext(), "About", Toast.LENGTH_LONG).show();
                         return true;
                 }
                 return false;
             }
         });
     }
-
 
     private Toolbar initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
