@@ -5,10 +5,11 @@ import android.content.res.Resources;
 import com.tematikhonov.androidgeekbrainssecondapp.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CardsSourceImp implements CardsSource {
 
-    private ArrayList<Note> list;
+    private List<Note> list;
     private Resources resources;
 
     public CardsSourceImp(Resources resources) {
@@ -20,7 +21,6 @@ public class CardsSourceImp implements CardsSource {
         String[] titles = resources.getStringArray(R.array.titles);
         String[] descriptions = resources.getStringArray(R.array.descriptions);
         String[] dates = resources.getStringArray(R.array.dates);
-
 
         for (int i = 0; i < titles.length; i++) {
             list.add(new Note(
@@ -53,15 +53,9 @@ public class CardsSourceImp implements CardsSource {
         list.set(position, note);
     }
 
-    /**
-     *
-     * @param note for addition
-     * @return
-     */
     @Override
-    public int addCardData(Note note) {
+    public void addCardData(Note note) {
         list.add(note);
-        return list.indexOf(note);
     }
 
     @Override

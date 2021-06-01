@@ -22,7 +22,7 @@
             android:layout_weight="6"
             android:orientation="vertical">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/titleCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
                 tools:text="Test text"
                 android:textSize="@dimen/title_size" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/dateCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,8 +42,19 @@
                 android:textSize="@dimen/text_size" />
         </LinearLayout>
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/descriptionCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLength="20"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            tools:text="Test description"
+            />
+
 
         <CheckBox
+            android:id="@+id/checkboxCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/default_margin"

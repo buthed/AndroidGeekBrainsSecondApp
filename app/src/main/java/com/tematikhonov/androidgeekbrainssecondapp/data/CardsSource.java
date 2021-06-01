@@ -5,6 +5,6 @@ public interface CardsSource {
     int size();
     void deleteCardData(int position);
     void updateCardData(int position, Note note);
-    int addCardData(Note note);
+    void addCardData(Note note);
     void clearCardData();
 }

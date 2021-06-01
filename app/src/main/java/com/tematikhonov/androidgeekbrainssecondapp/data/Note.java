@@ -1,9 +1,7 @@
 package com.tematikhonov.androidgeekbrainssecondapp.data;
 
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.RequiresApi;
 
 public class Note implements Parcelable {
     private String title;

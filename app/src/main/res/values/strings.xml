@@ -34,4 +34,6 @@
     <string name="favorite_mark">Add to favorite</string>
     <string name="add_card">Add card</string>
     <string name="delete_card">Delete card</string>
+    <string name="clear_card">Clear Card</string>
+    <string name="update_card">Update</string>
 </resources>
