@@ -1,4 +1,4 @@
-package com.tematikhonov.androidgeekbrainssecondapp;
+package com.tematikhonov.androidgeekbrainssecondapp.ui;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,14 +8,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tematikhonov.androidgeekbrainssecondapp.R;
+import com.tematikhonov.androidgeekbrainssecondapp.data.CardsSource;
+import com.tematikhonov.androidgeekbrainssecondapp.data.Note;
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     private static String TAG = "MyAdapter";
-    private CardsSource cardsSource;
+    private CardsSource dataSource;
     private OnItemClickListener listener;
 
     public MyAdapter(CardsSource cardsSource) {
-        this.cardsSource = cardsSource;
+        this.dataSource = cardsSource;
     }
 
     @NonNull
@@ -30,12 +34,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.bind(cardsSource.getNote(position));
+        holder.bind(dataSource.getNote(position));
     }
 
     @Override
     public int getItemCount() {
-        return cardsSource.size();
+        return dataSource.size();
     }
 
     public void setListener(OnItemClickListener listener) {
@@ -45,6 +49,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public OnItemClickListener getListener() {
         return listener;
     }
+
 
 
     class MyViewHolder extends RecyclerView.ViewHolder {

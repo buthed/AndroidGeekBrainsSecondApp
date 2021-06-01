@@ -1,6 +1,8 @@
-package com.tematikhonov.androidgeekbrainssecondapp;
+package com.tematikhonov.androidgeekbrainssecondapp.data;
 
 import android.content.res.Resources;
+
+import com.tematikhonov.androidgeekbrainssecondapp.R;
 
 import java.util.ArrayList;
 
@@ -40,4 +42,31 @@ public class CardsSourceImp implements CardsSource {
     public int size() {
         return list.size();
     }
+
+    @Override
+    public void deleteCardData(int position) {
+        list.remove(position);
+    }
+
+    @Override
+    public void updateCardData(int position, Note note) {
+        list.set(position, note);
+    }
+
+    /**
+     *
+     * @param note for addition
+     * @return
+     */
+    @Override
+    public int addCardData(Note note) {
+        list.add(note);
+        return list.indexOf(note);
+    }
+
+    @Override
+    public void clearCardData() {
+        list.clear();
+    }
+
 }

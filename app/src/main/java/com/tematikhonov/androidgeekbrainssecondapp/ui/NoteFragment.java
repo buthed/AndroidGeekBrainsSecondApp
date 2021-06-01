@@ -1,4 +1,4 @@
-package com.tematikhonov.androidgeekbrainssecondapp;
+package com.tematikhonov.androidgeekbrainssecondapp.ui;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -6,6 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.tematikhonov.androidgeekbrainssecondapp.R;
+import com.tematikhonov.androidgeekbrainssecondapp.data.Note;
 
 public class NoteFragment extends Fragment {
 

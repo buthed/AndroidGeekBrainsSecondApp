@@ -32,4 +32,6 @@
     <string name="default_profile_name">Profile Name</string>
     <string name="journal">Journal</string>
     <string name="favorite_mark">Add to favorite</string>
+    <string name="add_card">Add card</string>
+    <string name="delete_card">Delete card</string>
 </resources>

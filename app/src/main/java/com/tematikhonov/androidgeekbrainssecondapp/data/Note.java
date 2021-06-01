@@ -1,4 +1,4 @@
-package com.tematikhonov.androidgeekbrainssecondapp;
+package com.tematikhonov.androidgeekbrainssecondapp.data;
 
 import android.os.Build;
 import android.os.Parcel;
@@ -18,16 +18,14 @@ public class Note implements Parcelable {
         this.favorite = favorite;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.Q)
     protected Note(Parcel in) {
         title = in.readString();
         description = in.readString();
         date =  in.readString();
-        favorite = in.readBoolean();
+        favorite = in.readByte() != 0;
     }
 
     public static final Creator<Note> CREATOR = new Creator<Note>() {
-        @RequiresApi(api = Build.VERSION_CODES.Q)
         @Override
         public Note createFromParcel(Parcel in) {
             return new Note(in);
@@ -65,6 +63,6 @@ public class Note implements Parcelable {
         dest.writeString(title);
         dest.writeString(description);
         dest.writeString(date);
-        dest.writeString(String.valueOf(favorite));
+        dest.writeByte((byte) (favorite ? 1 : 0));
     }
 }

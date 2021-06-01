@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.tematikhonov.androidgeekbrainssecondapp.ui.NotesListFragment;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
+import com.tematikhonov.androidgeekbrainssecondapp.ui.NoteFragment;
+
 public class NoteViewActivity extends AppCompatActivity {
 
     @Override

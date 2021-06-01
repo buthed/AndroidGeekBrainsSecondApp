@@ -12,7 +12,7 @@
 
         <fragment
             android:id="@+id/notes"
-            android:name="com.tematikhonov.androidgeekbrainssecondapp.NotesListFragment"
+            android:name="com.tematikhonov.androidgeekbrainssecondapp.ui.NotesListFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
