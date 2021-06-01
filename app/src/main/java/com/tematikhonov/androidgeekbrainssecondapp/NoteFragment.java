@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 public class NoteFragment extends Fragment {
 
@@ -38,10 +36,9 @@ public class NoteFragment extends Fragment {
         TextView tvName = view.findViewById(R.id.noteName);
         TextView tvDescription = view.findViewById(R.id.noteDescription);
         TextView tvDate = view.findViewById(R.id.noteDate);
-        tvName.setText(note.getName());
+        tvName.setText(note.getTitle());
         tvDescription.setText(note.getDescription());
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy", Locale.getDefault());
-        tvDate.setText(String.format("%s", formatter.format(note.getCreationDate().getTime())));
+        tvDate.setText(note.getDate());
         return view;
     }
 }
