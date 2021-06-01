@@ -96,7 +96,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 @Override
                 public boolean onLongClick(View v) {
                     menuPosition = getLayoutPosition();
-                    itemView.showContextMenu(10,10);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        itemView.showContextMenu(10,10);
+                    }
                     return true;
                 }
             });
