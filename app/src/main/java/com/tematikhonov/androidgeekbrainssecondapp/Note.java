@@ -1,27 +1,33 @@
 package com.tematikhonov.androidgeekbrainssecondapp;
 
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-import java.util.Calendar;
+import androidx.annotation.RequiresApi;
 
 public class Note implements Parcelable {
-    private String name;
+    private String title;
+    private String date;
     private String description;
-    private Calendar creationDate;
+    private boolean favorite;
 
-    public Note(String name, String description, Calendar creationDate) {
-        this.name = name;
+    public Note(String title, String date, String description, boolean favorite) {
+        this.title = title;
+        this.date = date;
         this.description = description;
-        this.creationDate = creationDate;
+        this.favorite = favorite;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     protected Note(Parcel in) {
-        name = in.readString();
+        title = in.readString();
         description = in.readString();
-        creationDate = (Calendar) in.readSerializable();
+        date =  in.readString();
+        favorite = in.readBoolean();
     }
 
     public static final Creator<Note> CREATOR = new Creator<Note>() {
+        @RequiresApi(api = Build.VERSION_CODES.Q)
         @Override
         public Note createFromParcel(Parcel in) {
             return new Note(in);
@@ -33,16 +39,20 @@ public class Note implements Parcelable {
         }
     };
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public Calendar getCreationDate() {
-        return creationDate;
+    public boolean isFavorite() {
+        return favorite;
     }
 
     @Override
@@ -52,8 +62,9 @@ public class Note implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
+        dest.writeString(title);
         dest.writeString(description);
-        dest.writeSerializable(creationDate);
+        dest.writeString(date);
+        dest.writeString(String.valueOf(favorite));
     }
 }
