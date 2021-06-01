@@ -3,10 +3,7 @@ package com.tematikhonov.androidgeekbrainssecondapp;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import androidx.annotation.RequiresApi;
-
-import java.util.Calendar;
 
 public class Note implements Parcelable {
     private String title;

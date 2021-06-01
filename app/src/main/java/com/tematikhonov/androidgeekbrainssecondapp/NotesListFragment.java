@@ -15,13 +15,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class NotesListFragment extends Fragment {
 
     private static final String TAG = "myLogs";
-    private boolean isLandscape;
     private ArrayList<Note> notes;
     private Note currentNote;
 
@@ -51,7 +49,6 @@ public class NotesListFragment extends Fragment {
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(),  LinearLayoutManager.VERTICAL);
         itemDecoration.setDrawable(getResources().getDrawable(R.drawable.separator, null));
         recyclerView.addItemDecoration(itemDecoration);
-
 
         adapter.setListener(new MyAdapter.OnItemClickListener() {
             @Override

@@ -51,6 +51,6 @@
             android:button="@drawable/custom_checkbox"
             android:layout_gravity="center" />
 
-
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>
