@@ -3,13 +3,15 @@ package com.tematikhonov.androidgeekbrainssecondapp.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Date;
+
 public class Note implements Parcelable {
     private String title;
-    private String date;
+    private Date date;
     private String description;
     private boolean favorite;
 
-    public Note(String title, String date, String description, boolean favorite) {
+    public Note(String title, Date date, String description, boolean favorite) {
         this.title = title;
         this.date = date;
         this.description = description;
@@ -19,7 +21,7 @@ public class Note implements Parcelable {
     protected Note(Parcel in) {
         title = in.readString();
         description = in.readString();
-        date =  in.readString();
+        date = new Date(in.readLong());
         favorite = in.readByte() != 0;
     }
 
@@ -39,7 +41,7 @@ public class Note implements Parcelable {
         return title;
     }
 
-    public String getDate() {
+    public Date  getDate() {
         return date;
     }
 
@@ -60,7 +62,7 @@ public class Note implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
         dest.writeString(description);
-        dest.writeString(date);
+        dest.writeLong(date.getTime());
         dest.writeByte((byte) (favorite ? 1 : 0));
     }
 }

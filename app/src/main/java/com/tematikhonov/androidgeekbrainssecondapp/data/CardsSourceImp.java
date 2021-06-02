@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import com.tematikhonov.androidgeekbrainssecondapp.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class CardsSourceImp implements CardsSource {
@@ -25,7 +26,7 @@ public class CardsSourceImp implements CardsSource {
         for (int i = 0; i < titles.length; i++) {
             list.add(new Note(
                     titles[i],
-                    dates[i],
+                    Calendar.getInstance().getTime(),
                     descriptions[i],
                     false
             ));

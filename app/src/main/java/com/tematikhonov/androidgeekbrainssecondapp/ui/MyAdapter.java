@@ -15,7 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tematikhonov.androidgeekbrainssecondapp.R;
 import com.tematikhonov.androidgeekbrainssecondapp.data.CardsSource;
+import com.tematikhonov.androidgeekbrainssecondapp.data.Navigation;
 import com.tematikhonov.androidgeekbrainssecondapp.data.Note;
+import com.tematikhonov.androidgeekbrainssecondapp.data.Publisher;
+
+import java.text.SimpleDateFormat;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
@@ -25,10 +29,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private int menuPosition;
     private OnItemClickListener listener;
 
+
     public MyAdapter(CardsSource cardsSource, Fragment fragment) {
         this.data = cardsSource;
         this.fragment = fragment;
     }
+
 
     @NonNull
     @Override
@@ -107,7 +113,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         void setData(Note data) {
             title.setText(data.getTitle());
-            date.setText(data.getDate());
+            date.setText(new SimpleDateFormat("dd-MM-yy").format(data.getDate()));
             description.setText(data.getDescription());
             favorite.setChecked(data.isFavorite());
 //            title.setOnClickListener(v -> {
