@@ -8,13 +8,6 @@
         <item>@string/note5_name</item>
     </string-array>
 
-    <string-array name="dates">
-        <item>@string/note1_date</item>
-        <item>@string/note2_date</item>
-        <item>@string/note3_date</item>
-        <item>@string/note4_date</item>
-        <item>@string/note5_date</item>
-    </string-array>
 
     <string-array name="descriptions">
         <item>@string/note1_desc</item>

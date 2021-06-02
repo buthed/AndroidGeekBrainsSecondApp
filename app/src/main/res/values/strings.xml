@@ -7,19 +7,11 @@
     <string name="note4_name">Note 4</string>
     <string name="note5_name">Note 5</string>
 
-    <string name="note1_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed efficitur feugiat tincidunt. Etiam semper eros ex, ut vehicula lectus consequat eu. Maecenas vehicula nulla ut massa accumsan commodo. Quisque nec consequat nunc. Duis sed purus at dui ultricies commodo. Suspendisse vestibulum urna non lorem ultrices, ut imperdiet nisi elementum. Suspendisse consectetur gravida leo eu consectetur.</string>
+    <string name="note1_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed efficitur feugiat tincidunt. Etiam semper eros ex, ut vehicula lectus consequat eu. </string>
     <string name="note2_desc">Praesent fermentum ipsum quis auctor pulvinar. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus metus turpis, consectetur sed elit at, vehicula iaculis ante.</string>
     <string name="note3_desc">Aenean eget tellus mattis, posuere neque eu, dignissim lectus. Fusce at ultrices dolor, at accumsan ex. Mauris ac ipsum vehicula, pulvinar mi sit amet, congue urna.</string>
     <string name="note4_desc">Pellentesque vehicula metus ut leo luctus tristique. Mauris convallis augue non mi vulputate, at mattis erat tempus. Nunc dolor urna, euismod sit amet tempus quis, mollis sit amet augue.</string>
     <string name="note5_desc">Donec tincidunt nulla ut lectus interdum tincidunt. Nam aliquam tortor diam, vel porttitor arcu lobortis non. Integer placerat sagittis nisl eget porttitor. Donec pharetra elementum euismod.</string>
-
-
-    <string name="note1_date">31.01.2021</string>
-    <string name="note2_date">31.02.2021</string>
-    <string name="note3_date">31.03.2021</string>
-    <string name="note4_date">31.04.2021</string>
-    <string name="note5_date">31.05.2021</string>
-
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -32,4 +24,10 @@
     <string name="default_profile_name">Profile Name</string>
     <string name="journal">Journal</string>
     <string name="favorite_mark">Add to favorite</string>
+    <string name="add_card">Add card</string>
+    <string name="delete_card">Delete card</string>
+    <string name="clear_card">Clear Card</string>
+    <string name="update_card">Update</string>
+    <string name="title_name">Title</string>
+    <string name="description_name">Description</string>
 </resources>

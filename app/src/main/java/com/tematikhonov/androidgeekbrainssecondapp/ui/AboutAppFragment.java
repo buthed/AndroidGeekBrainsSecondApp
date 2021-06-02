@@ -1,4 +1,4 @@
-package com.tematikhonov.androidgeekbrainssecondapp;
+package com.tematikhonov.androidgeekbrainssecondapp.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.tematikhonov.androidgeekbrainssecondapp.R;
 
 public class AboutAppFragment extends Fragment {
     @Nullable

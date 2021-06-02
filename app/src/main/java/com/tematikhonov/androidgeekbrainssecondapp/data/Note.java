@@ -1,33 +1,31 @@
-package com.tematikhonov.androidgeekbrainssecondapp;
+package com.tematikhonov.androidgeekbrainssecondapp.data;
 
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.RequiresApi;
+
+import java.util.Date;
 
 public class Note implements Parcelable {
     private String title;
-    private String date;
+    private Date date;
     private String description;
     private boolean favorite;
 
-    public Note(String title, String date, String description, boolean favorite) {
+    public Note(String title, Date date, String description, boolean favorite) {
         this.title = title;
         this.date = date;
         this.description = description;
         this.favorite = favorite;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.Q)
     protected Note(Parcel in) {
         title = in.readString();
         description = in.readString();
-        date =  in.readString();
-        favorite = in.readBoolean();
+        date = new Date(in.readLong());
+        favorite = in.readByte() != 0;
     }
 
     public static final Creator<Note> CREATOR = new Creator<Note>() {
-        @RequiresApi(api = Build.VERSION_CODES.Q)
         @Override
         public Note createFromParcel(Parcel in) {
             return new Note(in);
@@ -43,7 +41,7 @@ public class Note implements Parcelable {
         return title;
     }
 
-    public String getDate() {
+    public Date  getDate() {
         return date;
     }
 
@@ -64,7 +62,7 @@ public class Note implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
         dest.writeString(description);
-        dest.writeString(date);
-        dest.writeString(String.valueOf(favorite));
+        dest.writeLong(date.getTime());
+        dest.writeByte((byte) (favorite ? 1 : 0));
     }
 }
