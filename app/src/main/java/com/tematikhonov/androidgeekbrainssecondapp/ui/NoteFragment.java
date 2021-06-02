@@ -1,6 +1,5 @@
 package com.tematikhonov.androidgeekbrainssecondapp.ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -11,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
-import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.tematikhonov.androidgeekbrainssecondapp.MainActivity;
@@ -28,7 +26,6 @@ public class NoteFragment extends Fragment {
 
     private Note note;
     private Publisher publisher;
-
     private TextInputEditText title;
     private TextInputEditText description;
     private DatePicker datePicker;
@@ -134,5 +131,4 @@ public class NoteFragment extends Fragment {
                 calendar.get(Calendar.DAY_OF_MONTH),
                 null);
     }
-
 }

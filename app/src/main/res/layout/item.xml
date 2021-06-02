@@ -40,6 +40,7 @@
                 android:gravity="end"
                 tools:text="Test date"
                 android:textSize="@dimen/text_size" />
+
         </LinearLayout>
 
         <com.google.android.material.textview.MaterialTextView
@@ -49,9 +50,7 @@
             android:layout_weight="1"
             android:maxLength="20"
             android:layout_marginHorizontal="@dimen/default_margin"
-            tools:text="Test description"
-            />
-
+            tools:text="Test description" />
 
         <CheckBox
             android:id="@+id/checkboxCard"

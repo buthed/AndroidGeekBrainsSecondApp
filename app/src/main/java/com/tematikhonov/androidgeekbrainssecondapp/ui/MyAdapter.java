@@ -5,19 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tematikhonov.androidgeekbrainssecondapp.R;
 import com.tematikhonov.androidgeekbrainssecondapp.data.CardsSource;
-import com.tematikhonov.androidgeekbrainssecondapp.data.Navigation;
 import com.tematikhonov.androidgeekbrainssecondapp.data.Note;
-import com.tematikhonov.androidgeekbrainssecondapp.data.Publisher;
 
 import java.text.SimpleDateFormat;
 
@@ -29,12 +25,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private int menuPosition;
     private OnItemClickListener listener;
 
-
     public MyAdapter(CardsSource cardsSource, Fragment fragment) {
         this.data = cardsSource;
         this.fragment = fragment;
     }
-
 
     @NonNull
     @Override
@@ -68,15 +62,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return listener;
     }
 
-
-
     class MyViewHolder extends RecyclerView.ViewHolder {
 
         private TextView title;
         private TextView date;
         private TextView description;
         private CheckBox favorite;
-
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -116,19 +107,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             date.setText(new SimpleDateFormat("dd-MM-yy").format(data.getDate()));
             description.setText(data.getDescription());
             favorite.setChecked(data.isFavorite());
-//            title.setOnClickListener(v -> {
-//                if (listener != null) {
-//                    listener.onItemClick(getAdapterPosition());
-//                }
-//            });
-//            title.setOnLongClickListener(new View.OnLongClickListener() {
-//                @Override
-//                public boolean onLongClick(View v) {
-//                    itemView.showContextMenu(10,10);
-//                    return true;
-//                }
-//            });
-
         }
     }
 

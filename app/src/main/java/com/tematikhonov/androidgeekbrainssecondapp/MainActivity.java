@@ -5,9 +5,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -84,14 +81,6 @@ public class MainActivity extends AppCompatActivity {
         return toolbar;
     }
 
-//    private void addFragment(Fragment fragment) {
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.fragment_container, fragment);
-//        fragmentTransaction.addToBackStack(null);
-//        fragmentTransaction.commit();
-//    }
-
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -105,5 +94,4 @@ public class MainActivity extends AppCompatActivity {
     public Publisher getPublisher() {
         return publisher;
     }
-
 }

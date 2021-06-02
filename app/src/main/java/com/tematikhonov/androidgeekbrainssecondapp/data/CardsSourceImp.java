@@ -21,7 +21,6 @@ public class CardsSourceImp implements CardsSource {
     public CardsSourceImp init() {
         String[] titles = resources.getStringArray(R.array.titles);
         String[] descriptions = resources.getStringArray(R.array.descriptions);
-        String[] dates = resources.getStringArray(R.array.dates);
 
         for (int i = 0; i < titles.length; i++) {
             list.add(new Note(
@@ -63,5 +62,4 @@ public class CardsSourceImp implements CardsSource {
     public void clearCardData() {
         list.clear();
     }
-
 }

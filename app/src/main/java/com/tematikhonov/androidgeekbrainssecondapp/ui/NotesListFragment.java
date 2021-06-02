@@ -29,16 +29,12 @@ import com.tematikhonov.androidgeekbrainssecondapp.data.Note;
 import com.tematikhonov.androidgeekbrainssecondapp.data.Observer;
 import com.tematikhonov.androidgeekbrainssecondapp.data.Publisher;
 
-import java.util.ArrayList;
 import java.util.List;
-
 
 public class NotesListFragment extends Fragment {
 
-
     private static final String TAG = "myLogs";
     private RecyclerView recyclerView;
-    private List<Note> notes;
     private MyAdapter adapter;
     private CardsSource data;
     private Navigation navigation;
@@ -87,36 +83,28 @@ public class NotesListFragment extends Fragment {
         inflater.inflate(R.menu.notes_menu, menu);
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.action_add:
-//                  Log.d(TAG, "Клик");
-////                data.addCardData(new Note(
-////                        "Title " + data.size(),
-////                        "Date " + data.size(),
-////                        "Description" + data.size(),
-////                        false));
-////
-////                adapter.notifyItemInserted(data.size() - 1);
-////                recyclerView.smoothScrollToPosition(data.size() - 1);
-//                navigation.addFragment(NoteFragment.newInstance(), true);
-//                publisher.subscribe(new Observer() {
-//                    @Override
-//                    public void updateCardData(Note note) {
-//                        data.addCardData(note);
-//                        adapter.notifyItemInserted(data.size() - 1);
-//                        moveToLastPosition = true;
-//                    }
-//                });
-//                return true;
-//            case R.id.action_clear:
-//                data.clearCardData();
-//                adapter.notifyDataSetChanged();
-//                return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                  Log.d(TAG, "Клик");
+                navigation.addFragment(NoteFragment.newInstance(), true);
+                publisher.subscribe(new Observer() {
+                    @Override
+                    public void updateCardData(Note note) {
+                        data.addCardData(note);
+                        adapter.notifyItemInserted(data.size() - 1);
+                        moveToLastPosition = true;
+                    }
+                });
+                return true;
+            case R.id.action_clear:
+                data.clearCardData();
+                adapter.notifyDataSetChanged();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
@@ -130,14 +118,6 @@ public class NotesListFragment extends Fragment {
         final int position = adapter.getMenuPosition();
         switch (item.getItemId()) {
             case R.id.action_update:
-//                data.updateCardData(position,
-//                        new Note(
-//                                "Clone " + data.size(),
-//                                "Date " + data.size(),
-//                                "Description" + data.size(),
-//                                false));
-//                adapter.notifyItemChanged(position);
-
                 navigation.addFragment(NoteFragment.newInstance(data.getNote(position)), true);
                 publisher.subscribe(new Observer() {
                     @Override
@@ -146,7 +126,6 @@ public class NotesListFragment extends Fragment {
                         adapter.notifyItemChanged(position);
                     }
                 });
-
                 Log.d(TAG, "Клик");
                 return true;
             case R.id.action_delete:
