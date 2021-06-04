@@ -30,4 +30,6 @@
     <string name="update_card">Update</string>
     <string name="title_name">Title</string>
     <string name="description_name">Description</string>
+    <string name="continue_">Продолжить...</string>
+    <string name="sign_out">Выйти</string>
 </resources>

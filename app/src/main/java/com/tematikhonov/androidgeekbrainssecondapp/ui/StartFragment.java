@@ -1,5 +1,33 @@
 package com.tematikhonov.androidgeekbrainssecondapp.ui;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.tematikhonov.androidgeekbrainssecondapp.MainActivity;
+import com.tematikhonov.androidgeekbrainssecondapp.R;
+import com.tematikhonov.androidgeekbrainssecondapp.data.Navigation;
+
+import java.sql.Struct;
+
 public class StartFragment  extends Fragment {
 
     // Используется, чтобы определить результат activity регистрации через
@@ -14,8 +42,9 @@ public class StartFragment  extends Fragment {
 
     // Кнопка регистрации через Google
     private com.google.android.gms.common.SignInButton buttonSignIn;
+    private Button buttonSingOut;
     private TextView emailView;
-    private MaterialButton continue_;
+    private Button sign_continue;
 
     public static StartFragment newInstance() {
         StartFragment fragment = new StartFragment();
@@ -74,14 +103,21 @@ public class StartFragment  extends Fragment {
 
         emailView = view.findViewById(R.id.email);
 
-        // Кнопка «Продолжить», будем показывать главный фрагмент
-        continue_ = view.findViewById(R.id.continue_);
-        continue_.setOnClickListener(new View.OnClickListener() {
+        sign_continue = view.findViewById(R.id.sign_continue);
+        sign_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigation.addFragment(SocialNetworkFragment.newInstance(), false);
+                navigation.addFragment(NotesListFragment.newInstance(), false);
             }
         });
+        buttonSingOut =  view.findViewById(R.id.sing_out_button);
+        buttonSingOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signOut();
+            }
+        });
+
     }
 
     @Override
@@ -101,6 +137,18 @@ public class StartFragment  extends Fragment {
     private void signIn() {
         Intent signInIntent = googleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
+//        navigation.addFragment(NotesListFragment.newInstance(), false);
+    }
+
+    private void signOut() {
+        googleSignInClient.signOut()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        updateUI("");
+                        enableSign();
+                    }
+                });
     }
 
     // Здесь получим ответ от системы, что пользователь вошёл
@@ -141,12 +189,14 @@ public class StartFragment  extends Fragment {
     // Разрешить аутентификацию и запретить остальные действия
     private void enableSign(){
         buttonSignIn.setEnabled(true);
-        continue_.setEnabled(false);
+        sign_continue.setEnabled(false);
+        buttonSingOut.setEnabled(false);
     }
 
     // Запретить аутентификацию (уже прошла) и разрешить остальные действия
     private void disableSign(){
         buttonSignIn.setEnabled(false);
-        continue_.setEnabled(true);
+        sign_continue.setEnabled(true);
+        buttonSingOut.setEnabled(true);
     }
 }

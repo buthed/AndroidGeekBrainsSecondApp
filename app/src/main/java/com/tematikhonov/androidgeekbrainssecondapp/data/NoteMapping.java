@@ -1,8 +1,5 @@
 package com.tematikhonov.androidgeekbrainssecondapp.data;
 
-
-
-
 import com.google.firebase.Timestamp;
 
 import java.util.HashMap;

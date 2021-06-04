@@ -78,8 +78,6 @@ public class CardSourceFirebaseImp  implements CardsSource {
         notes.remove(position);
     }
 
-
-
     @Override
     public void updateCardData(int position, Note note) {
         String id = note.getId();
@@ -106,4 +104,3 @@ public class CardSourceFirebaseImp  implements CardsSource {
     }
 
 }
-

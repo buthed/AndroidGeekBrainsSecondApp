@@ -15,6 +15,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.tematikhonov.androidgeekbrainssecondapp.data.Navigation;
 import com.tematikhonov.androidgeekbrainssecondapp.data.Publisher;
 import com.tematikhonov.androidgeekbrainssecondapp.ui.NotesListFragment;
+import com.tematikhonov.androidgeekbrainssecondapp.ui.StartFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         navigation = new Navigation(getSupportFragmentManager());
         initView();
-        getNavigation().addFragment(NotesListFragment.newInstance(), false);
+        getNavigation().addFragment(StartFragment.newInstance(), false);
 
     }
 

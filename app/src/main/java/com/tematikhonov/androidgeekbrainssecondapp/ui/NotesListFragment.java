@@ -99,33 +99,6 @@ public class NotesListFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.action_add:
-//                  Log.d(TAG, "Клик");
-//                navigation.addFragment(NoteFragment.newInstance(), true);
-//                publisher.subscribe(new Observer() {
-//                    @Override
-//                    public void updateCardData(Note note) {
-//                        data.addCardData(note);
-//                        adapter.notifyItemInserted(data.size() - 1);
-//                        moveToLastPosition = true;
-//                    }
-//                });
-//                return true;
-//            case R.id.action_clear:
-//                data.update(new CardsSourceResponce() {
-//                    @Override
-//                    public void initializes(CardsSource cardsSource) {
-//                        adapter.notifyDataSetChanged();
-//                    }
-//                });
-//                adapter.notifyDataSetChanged();
-//
-////                data.clearCardData();
-////                adapter.notifyDataSetChanged();
-//                return true;
-//        }
-//        return super.onOptionsItemSelected(item);
         return onItemSelected(item.getItemId()) || super.onOptionsItemSelected(item);
     }
 
@@ -138,25 +111,6 @@ public class NotesListFragment extends Fragment {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-//        final int position = adapter.getMenuPosition();
-//        switch (item.getItemId()) {
-//            case R.id.action_update:
-//                navigation.addFragment(NoteFragment.newInstance(data.getNote(position)), true);
-//                publisher.subscribe(new Observer() {
-//                    @Override
-//                    public void updateCardData(Note note) {
-//                        data.updateCardData(position, note);
-//                        adapter.notifyItemChanged(position);
-//                    }
-//                });
-//                Log.d(TAG, "Клик");
-//                return true;
-//            case R.id.action_delete:
-//                data.deleteCardData(position);
-//                adapter.notifyItemRemoved(position);
-//                return true;
-//        }
-//        return super.onContextItemSelected(item);
         return onItemSelected(item.getItemId()) || super.onContextItemSelected(item);
     }
 
@@ -198,8 +152,6 @@ public class NotesListFragment extends Fragment {
         }
         return false;
     }
-
-
 
     private void initRecyclerView() {
         recyclerView.setHasFixedSize(true);

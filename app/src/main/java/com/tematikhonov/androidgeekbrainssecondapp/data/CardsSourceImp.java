@@ -38,8 +38,6 @@ public class CardsSourceImp implements CardsSource {
         return this;
     }
 
-
-
     @Override
     public Note getNote(int position) {
         return list.get(position);
