@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "112730069506",
+    "project_id": "dreamnotes-29a19",
+    "storage_bucket": "dreamnotes-29a19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112730069506:android:b244de0af68b9cec70251b",
+        "android_client_info": {
+          "package_name": "com.tematikhonov.dreamnotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "112730069506-p12iesslk0hi3kbgleflm91v4mo2i8f4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfAHkt9JcVSn71JwAprWB6S05WrsC26sk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "112730069506-p12iesslk0hi3kbgleflm91v4mo2i8f4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
