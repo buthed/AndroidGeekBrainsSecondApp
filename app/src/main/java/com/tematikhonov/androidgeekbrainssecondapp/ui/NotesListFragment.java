@@ -22,8 +22,10 @@ import android.widget.Toast;
 
 import com.tematikhonov.androidgeekbrainssecondapp.MainActivity;
 import com.tematikhonov.androidgeekbrainssecondapp.R;
+import com.tematikhonov.androidgeekbrainssecondapp.data.CardSourceFirebaseImp;
 import com.tematikhonov.androidgeekbrainssecondapp.data.CardsSource;
 import com.tematikhonov.androidgeekbrainssecondapp.data.CardsSourceImp;
+import com.tematikhonov.androidgeekbrainssecondapp.data.CardsSourceResponce;
 import com.tematikhonov.androidgeekbrainssecondapp.data.Navigation;
 import com.tematikhonov.androidgeekbrainssecondapp.data.Note;
 import com.tematikhonov.androidgeekbrainssecondapp.data.Observer;
@@ -39,7 +41,7 @@ public class NotesListFragment extends Fragment {
     private CardsSource data;
     private Navigation navigation;
     private Publisher publisher;
-    private boolean moveToLastPosition;
+    private boolean moveToFirstPosition;
 
     public static NotesListFragment newInstance() {
         return new NotesListFragment();
@@ -48,7 +50,13 @@ public class NotesListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        data = new CardsSourceImp(getResources()).init();
+
+        data = new CardSourceFirebaseImp().init(new CardsSourceResponce() {
+            @Override
+            public void initializes(CardsSource cardsSource) {
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -58,8 +66,14 @@ public class NotesListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_notes_list, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
         initRecyclerView();
-
         setHasOptionsMenu(true);
+        data = new CardSourceFirebaseImp().init(new CardsSourceResponce() {
+            @Override
+            public void initializes(CardsSource cardsSource) {
+                adapter.notifyDataSetChanged();
+            }
+        });
+        adapter.setDataSource(data);
         return view;
     }
 
@@ -85,25 +99,34 @@ public class NotesListFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_add:
-                  Log.d(TAG, "Клик");
-                navigation.addFragment(NoteFragment.newInstance(), true);
-                publisher.subscribe(new Observer() {
-                    @Override
-                    public void updateCardData(Note note) {
-                        data.addCardData(note);
-                        adapter.notifyItemInserted(data.size() - 1);
-                        moveToLastPosition = true;
-                    }
-                });
-                return true;
-            case R.id.action_clear:
-                data.clearCardData();
-                adapter.notifyDataSetChanged();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+//        switch (item.getItemId()) {
+//            case R.id.action_add:
+//                  Log.d(TAG, "Клик");
+//                navigation.addFragment(NoteFragment.newInstance(), true);
+//                publisher.subscribe(new Observer() {
+//                    @Override
+//                    public void updateCardData(Note note) {
+//                        data.addCardData(note);
+//                        adapter.notifyItemInserted(data.size() - 1);
+//                        moveToLastPosition = true;
+//                    }
+//                });
+//                return true;
+//            case R.id.action_clear:
+//                data.update(new CardsSourceResponce() {
+//                    @Override
+//                    public void initializes(CardsSource cardsSource) {
+//                        adapter.notifyDataSetChanged();
+//                    }
+//                });
+//                adapter.notifyDataSetChanged();
+//
+////                data.clearCardData();
+////                adapter.notifyDataSetChanged();
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+        return onItemSelected(item.getItemId()) || super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -115,33 +138,75 @@ public class NotesListFragment extends Fragment {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        final int position = adapter.getMenuPosition();
-        switch (item.getItemId()) {
-            case R.id.action_update:
-                navigation.addFragment(NoteFragment.newInstance(data.getNote(position)), true);
+//        final int position = adapter.getMenuPosition();
+//        switch (item.getItemId()) {
+//            case R.id.action_update:
+//                navigation.addFragment(NoteFragment.newInstance(data.getNote(position)), true);
+//                publisher.subscribe(new Observer() {
+//                    @Override
+//                    public void updateCardData(Note note) {
+//                        data.updateCardData(position, note);
+//                        adapter.notifyItemChanged(position);
+//                    }
+//                });
+//                Log.d(TAG, "Клик");
+//                return true;
+//            case R.id.action_delete:
+//                data.deleteCardData(position);
+//                adapter.notifyItemRemoved(position);
+//                return true;
+//        }
+//        return super.onContextItemSelected(item);
+        return onItemSelected(item.getItemId()) || super.onContextItemSelected(item);
+    }
+
+    private boolean onItemSelected(int menuItemId){
+        switch (menuItemId){
+            case R.id.action_add:
+                navigation.addFragment(NoteFragment.newInstance(), true);
                 publisher.subscribe(new Observer() {
                     @Override
                     public void updateCardData(Note note) {
-                        data.updateCardData(position, note);
-                        adapter.notifyItemChanged(position);
+                        data.addCardData(note);
+                        adapter.notifyItemInserted(data.size() - 1);
+                        // это сигнал, чтобы вызванный метод onCreateView
+                        // перепрыгнул на начало списка
+                        moveToFirstPosition = true;
                     }
                 });
-                Log.d(TAG, "Клик");
+                return true;
+            case R.id.action_update:
+                final int updatePosition = adapter.getMenuPosition();
+                navigation.addFragment(NoteFragment.newInstance(data.getNote(updatePosition)), true);
+                publisher.subscribe(new Observer() {
+                    @Override
+                    public void updateCardData(Note note) {
+                        data.updateCardData(updatePosition, note);
+                        adapter.notifyItemChanged(updatePosition);
+                    }
+                });
                 return true;
             case R.id.action_delete:
-                data.deleteCardData(position);
-                adapter.notifyItemRemoved(position);
+                int deletePosition = adapter.getMenuPosition();
+                data.deleteCardData(deletePosition);
+                adapter.notifyItemRemoved(deletePosition);
+                return true;
+            case R.id.action_clear:
+                data.clearCardData();
+                adapter.notifyDataSetChanged();
                 return true;
         }
-        return super.onContextItemSelected(item);
+        return false;
     }
+
+
 
     private void initRecyclerView() {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new MyAdapter(data, this);
+        adapter = new MyAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(null);
 
@@ -154,9 +219,9 @@ public class NotesListFragment extends Fragment {
         animator.setRemoveDuration(1000);
         recyclerView.setItemAnimator(animator);
 
-        if (moveToLastPosition){
-            recyclerView.smoothScrollToPosition(data.size() - 1);
-            moveToLastPosition = false;
+        if (moveToFirstPosition && data.size() > 0){
+            recyclerView.scrollToPosition(0);
+            moveToFirstPosition = false;
         }
 
         adapter.setListener(new MyAdapter.OnItemClickListener() {

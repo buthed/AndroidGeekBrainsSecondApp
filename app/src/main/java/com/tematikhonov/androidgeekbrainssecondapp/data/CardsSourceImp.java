@@ -6,6 +6,7 @@ import com.tematikhonov.androidgeekbrainssecondapp.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class CardsSourceImp implements CardsSource {
@@ -18,20 +19,26 @@ public class CardsSourceImp implements CardsSource {
         this.resources = resources;
     }
 
-    public CardsSourceImp init() {
+    @Override
+    public CardsSource init(CardsSourceResponce cardsSourceResponce) {
         String[] titles = resources.getStringArray(R.array.titles);
         String[] descriptions = resources.getStringArray(R.array.descriptions);
 
         for (int i = 0; i < titles.length; i++) {
             list.add(new Note(
                     titles[i],
-                    Calendar.getInstance().getTime(),
+                    new Date(),
                     descriptions[i],
                     false
             ));
         }
+        if (cardsSourceResponce != null){
+            cardsSourceResponce.initializes(this);
+        }
         return this;
     }
+
+
 
     @Override
     public Note getNote(int position) {
