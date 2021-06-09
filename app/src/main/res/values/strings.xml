@@ -32,4 +32,9 @@
     <string name="description_name">Description</string>
     <string name="continue_">Продолжить...</string>
     <string name="sign_out">Выйти</string>
+    <string name="title_dialog">title dialog</string>
+    <string name="done">YES</string>
+    <string name="delete_dialog_title">Delete item</string>
+    <string name="delete_dialog_pos_btn">Yes</string>
+    <string name="delete_dialog_neg_btn">No</string>
 </resources>
