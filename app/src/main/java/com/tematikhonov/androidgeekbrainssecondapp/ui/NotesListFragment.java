@@ -1,6 +1,5 @@
 package com.tematikhonov.androidgeekbrainssecondapp.ui;
 
-import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,20 +19,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.tematikhonov.androidgeekbrainssecondapp.MainActivity;
 import com.tematikhonov.androidgeekbrainssecondapp.R;
 import com.tematikhonov.androidgeekbrainssecondapp.data.CardSourceFirebaseImp;
 import com.tematikhonov.androidgeekbrainssecondapp.data.CardsSource;
-import com.tematikhonov.androidgeekbrainssecondapp.data.CardsSourceImp;
 import com.tematikhonov.androidgeekbrainssecondapp.data.CardsSourceResponce;
 import com.tematikhonov.androidgeekbrainssecondapp.data.Navigation;
 import com.tematikhonov.androidgeekbrainssecondapp.data.Note;
 import com.tematikhonov.androidgeekbrainssecondapp.data.Observer;
 import com.tematikhonov.androidgeekbrainssecondapp.data.Publisher;
 
-import java.util.List;
-
-public class NotesListFragment extends Fragment {
+public class NotesListFragment extends Fragment implements DialogBuilderFragment.DeleteDialogCaller {
 
     private static final String TAG = "myLogs";
     private RecyclerView recyclerView;
@@ -45,18 +40,6 @@ public class NotesListFragment extends Fragment {
 
     public static NotesListFragment newInstance() {
         return new NotesListFragment();
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        data = new CardSourceFirebaseImp().init(new CardsSourceResponce() {
-            @Override
-            public void initializes(CardsSource cardsSource) {
-                adapter.notifyDataSetChanged();
-            }
-        });
     }
 
     @Override
@@ -75,21 +58,6 @@ public class NotesListFragment extends Fragment {
         });
         adapter.setDataSource(data);
         return view;
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        MainActivity activity = (MainActivity)context;
-        navigation = activity.getNavigation();
-        publisher = activity.getPublisher();
-    }
-
-    @Override
-    public void onDetach() {
-        navigation = null;
-        publisher = null;
-        super.onDetach();
     }
 
     @Override
@@ -123,8 +91,6 @@ public class NotesListFragment extends Fragment {
                     public void updateCardData(Note note) {
                         data.addCardData(note);
                         adapter.notifyItemInserted(data.size() - 1);
-                        // это сигнал, чтобы вызванный метод onCreateView
-                        // перепрыгнул на начало списка
                         moveToFirstPosition = true;
                     }
                 });
@@ -142,8 +108,9 @@ public class NotesListFragment extends Fragment {
                 return true;
             case R.id.action_delete:
                 int deletePosition = adapter.getMenuPosition();
-                data.deleteCardData(deletePosition);
-                adapter.notifyItemRemoved(deletePosition);
+                DialogBuilderFragment dialogFragment = new DialogBuilderFragment();
+                dialogFragment.setTargetFragment(this, 0);
+                dialogFragment.show(getActivity().getSupportFragmentManager(), null);
                 return true;
             case R.id.action_clear:
                 data.clearCardData();
@@ -183,5 +150,17 @@ public class NotesListFragment extends Fragment {
                 Toast.makeText(getContext(), String.format("Позиция - ", position), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onDialogResult(String result) {
+        int position = adapter.getMenuPosition();
+        if (result.equals("DELETE")) {
+            int deletePosition = adapter.getMenuPosition();
+            data.deleteCardData(deletePosition);
+            adapter.notifyItemRemoved(deletePosition);
+        } else if (result.equals("CANCEL")) {
+            Toast.makeText(getContext(), "Отклонено удаление заметки " + position, Toast.LENGTH_SHORT).show();
+        }
     }
 }
