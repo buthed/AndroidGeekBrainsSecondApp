@@ -9,13 +9,13 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.tematikhonov.androidgeekbrainssecondapp.data.*
-import com.tematikhonov.androidgeekbrainssecondapp.ui.NoteFragment.Companion.newInstance
 import com.tematikhonov.androidgeekbrainssecondapp.ui.NotesListFragment
 
 class MainActivity : AppCompatActivity() {
     var navigation: Navigation? = null
         private set
     val publisher = Publisher()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
         val toolbar = initToolbar()
         initDrawer(toolbar)
+        navigation?.addFragment(NotesListFragment(), false)
+
     }
 
     private fun initDrawer(toolbar: Toolbar) {
@@ -79,6 +81,8 @@ class MainActivity : AppCompatActivity() {
         onBackPressed()
         return true
     }
+
+
 
     companion object {
         private const val TAG = "myLogs"
